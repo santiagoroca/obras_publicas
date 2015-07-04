@@ -12,20 +12,18 @@ class home extends CI_Controller {
 
 	private function loadContent ($view_name) {
 		$this->load->view('commons/header');
-		$this->load->view($view_name);
+		$this->load->view($view_name, Array (
+			'action_url' => ''
+		));
 		$this->load->view('commons/footer');
 	}
 
 	public function index () {
-		$this->loadContent ('home/home', Array (
-			'action_url' => ''
-		));
+		$this->loadContent ('home/home');
 	}
 
 	public function create_form () {
-		$this->loadContent ('home/nuevo_usuario', Array (
-			'action_url' => ''
-		));
+		$this->loadContent ('home/nuevo_usuario');
 	}
 
 }
