@@ -27,6 +27,10 @@ class home extends CI_Controller {
 		$this->loadContent ('home/nuevo_usuario');
 	}
 
+	public function update_form () {
+		$this->loadContent ('home/modificar_usuario');
+	}
+
 	public function log_in () {
 		echo $this->user_model->log_in (
 			$this->input->post ('usuario'),
