@@ -16,8 +16,16 @@ class home extends CI_Controller {
 		$this->load->view('commons/footer');
 	}
 
-	public function index() {
-		$this->loadContent ('home/home');
+	public function index () {
+		$this->loadContent ('home/home', Array (
+			'action_url' => ''
+		));
+	}
+
+	public function create_form () {
+		$this->loadContent ('home/nuevo_usuario', Array (
+			'action_url' => ''
+		));
 	}
 
 }
