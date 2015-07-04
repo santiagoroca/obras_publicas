@@ -16,4 +16,5 @@
 
 	</head>
 
-	<body class="home-body">
+	<body>
+		<div class="home-body"></div>

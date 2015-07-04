@@ -1,6 +1,6 @@
 <div class="row log-in">
   <div class="col-md-4"></div>
-  <div class="col-md-4 form">
+  <div class="col-md-4 form-createuser">
     <form class="form-horizontal" action="<?=$action_url?>" method="POST">
       <div class="form-group">
         <label for="inputEmail3" class="col-sm-2 control-label">Usuario</label>
