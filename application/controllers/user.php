@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class home extends CI_Controller {
+class user extends CI_Controller {
 
 	public function __construct () {
 		parent::__construct();
@@ -10,6 +10,10 @@ class home extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->model("user_model");
 	}
+
+    public function index () {
+        $this->log_in_form ();
+    }
 
 	private function loadContent ($view_name, $params, $header) {
 		$this->load->view('commons/header'.$header);

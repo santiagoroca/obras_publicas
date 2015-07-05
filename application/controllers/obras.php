@@ -33,6 +33,10 @@ class obras extends CI_Controller {
 	    return $errors;
 	}
 
+	public function index () {
+		$this->home ();
+	}
+
 	public function create_form () {
 		$this->loadContent ('obras/crear', Array (
 			'action_url' => 'create'
@@ -45,7 +49,7 @@ class obras extends CI_Controller {
 		), '');
 	}
 
-	public function list_form () {
+	public function home () {
 		$this->loadContent ('obras/listar', Array (), '');
 	}
 
