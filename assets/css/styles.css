@@ -38,9 +38,22 @@
 }
 
 .topbar {
-	height: 50px;
+	height: 80px;
 }
 
 .update-user-title {
 	margin-bottom: 50px;
+}
+
+.bar-border-radius {
+	border-radius: 0px!important;
+}
+
+.img-height {
+	height: 100%;
+	padding: 10px;
+}
+
+.header-link {
+	background: #f4f4f4
 }
