@@ -17,6 +17,22 @@ class home extends CI_Controller {
 		$this->load->view('commons/footer');
 	}
 
+	private function checkPassword ($pwd, &$errors) {
+	    if (strlen($pwd) < 8) {
+	        $errors[] = "Password too short.";
+	    }
+
+	    if (!preg_match("#[0-9]+#", $pwd)) {
+	        $errors[] = "Password must include at least one number.";
+	    }
+
+	    if (!preg_match("#[a-zA-Z]+#", $pwd)) {
+	        $errors[] = "Password must include at least one letter.";
+	    }     
+
+	    return $errors;
+	}
+
 	public function log_in_form () {
 		$this->loadContent ('home/home', Array (
 			'action_url' => 'log_in',
@@ -25,8 +41,11 @@ class home extends CI_Controller {
 	}
 
 	public function create_form () {
+		$errors = $this->session->flashdata('errors');
+
 		$this->loadContent ('home/nuevo_usuario', Array (
-			'action_url' => 'create'
+			'action_url' => 'create',
+			'errors' => isset($errors) ? json_decode($errors) : false
 		));
 	}
 
@@ -46,15 +65,43 @@ class home extends CI_Controller {
 	}
 
 	public function create () {
+		$user = $this->input->post ('usuario');
+		$password = $this->input->post ('contrasenia');
+		$name = $this->input->post ('nombre');
+		$last_name = $this->input->post ('apellido');
+		$address = $this->input->post ('direccion');
+		$tel = $this->input->post ('telefono');
+		$email = $this->input->post ('email');
+
+		$data = Array (
+			'user_info' => Array (),
+			'errors' => Array ()
+		);
+
+		$this->checkPassword ($password, $errors ['errors']);
+
+		if ($errors) {
+			$errors ['user_info']['user'] = $user;
+			$errors ['user_info']['password'] = $password;
+			$errors ['user_info']['name'] = $name;
+			$errors ['user_info']['last_name'] = $last_name;
+			$errors ['user_info']['address'] = $address;
+			$errors ['user_info']['tel'] = $tel;
+			$errors ['user_info']['email'] = $email;
+
+			$this->session->set_flashdata('errors', json_encode($errors));
+			redirect(base_url().'home/create_form');
+		}
+
 		if ($this->user_model->create ( Array (
-				'user' => $this->input->post ('usuario'),
-				'hash' => $this->input->post ('contrasenia')
+				'user' => $user,
+				'hash' => $password
 			), Array (
-				'name' => $this->input->post ('nombre'),
-				'last_name' => $this->input->post ('apellido'),
-				'address' => $this->input->post ('direccion'),
-				'tel' => $this->input->post ('telefono'),
-				'email' =>$this->input->post ('email'),
+				'name' => $name,
+				'last_name' => $last_name,
+				'address' => $address,
+				'tel' => $tel,
+				'email' =>$email,
 				'type' => 1
 			)
 		)) {
