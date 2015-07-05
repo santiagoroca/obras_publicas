@@ -16,14 +16,15 @@
       </div>
       <div class="row-fluid">
         <div class="col-md-8">
-         <a href="<?=$new_user_url?>">Nuevo Usuario</a>
+          <a href="<?=$new_user_url?>">Nuevo Usuario</a>
         </div>
         <div class="col-md-4">
           <div class="form-group">
             <button type="submit" class="btn btn-default">Ingresar</button>
           </div>
         </div>
-      </form>
-    </div>
-    <div class="col-md-4"></div>
+      </div>
+    </form>
   </div>
+  <div class="col-md-4"></div>
+</div>
