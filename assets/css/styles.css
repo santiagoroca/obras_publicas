@@ -37,6 +37,6 @@
 	color: #444444;
 }
 
-.form-createuser button {
-	float: right;
+.topbar {
+	height: 50px;
 }
