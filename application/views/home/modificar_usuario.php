@@ -2,9 +2,18 @@
   <div class="col-md-3"></div>
   <div class="col-md-6">
     <h1 class="update-user-title" >Mis Datos</h1>
+    
+    <?php if ($errors)
+      foreach ($errors as $key => $value) { ?>
+        <div class="alert alert-danger" role="alert"><?=$value?></div>
+    <?php } ?>
+    <?php if ($success) { ?>
+        <div class="alert alert-success" role="alert"><?=$success?></div>
+    <?php } ?>
+
+    <div class="page-header page-header-custom" ></div>
     <form method="POST" action="<?=$action_url_user_info?>">
       <div class="row">
-        <div class="alert alert-danger" role="alert">...</div>
         <div class="col-md-5">
           <div class="form-group">
             <label >Usuario</label>

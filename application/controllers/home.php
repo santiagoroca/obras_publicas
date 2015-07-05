@@ -57,7 +57,7 @@ class home extends CI_Controller {
             'data' => $this->session->all_userdata()['data'],
             'action_url_profile_info' => 'update_profile',
             'action_url_user_info' => 'update_user',
-            'errors' => $errors,
+            'errors' => isset($errors) ? json_decode($errors) : false,
             'success' => $success
         ), '');
 	}
