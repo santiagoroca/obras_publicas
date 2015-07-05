@@ -38,7 +38,7 @@ class user extends CI_Controller {
 	}
 
 	public function log_in_form () {
-		$this->loadContent ('home/home', Array (
+		$this->loadContent ('user/home', Array (
 			'action_url' => 'log_in',
 			'new_user_url' => 'create_form'
 		), '_out');
@@ -47,7 +47,7 @@ class user extends CI_Controller {
 	public function create_form () {
 		$errors = $this->session->flashdata('errors');
 
-		$this->loadContent ('home/nuevo_usuario', Array (
+		$this->loadContent ('user/nuevo_usuario', Array (
 			'action_url' => 'create',
 			'errors' => isset($errors) ? json_decode($errors) : false
 		), '_out');
@@ -57,7 +57,7 @@ class user extends CI_Controller {
         $errors = $this->session->flashdata('errors');
         $success = $this->session->flashdata('success');
 
-		$this->loadContent ('home/modificar_usuario', Array(
+		$this->loadContent ('user/modificar_usuario', Array(
             'data' => $this->session->all_userdata()['data'],
             'action_url_profile_info' => 'update_profile',
             'action_url_user_info' => 'update_user',
@@ -84,11 +84,11 @@ class user extends CI_Controller {
         $this->user_model->update_user ($this->session->all_userdata()['data']->u_id, $password);
         $this->session->set_flashdata('success', 'Su contraseña ha sido cambiada con exito.');
 
-        redirect (base_url().'home/update_form'); 
+        redirect (base_url().'user/update_form'); 
     }
 
     public function update_profile () {
-        redirect (base_url().'home/update_form'); 
+        redirect (base_url().'user/update_form'); 
     }
 
 	public function log_in () {
@@ -96,9 +96,9 @@ class user extends CI_Controller {
 			$this->input->post ('usuario'),
 			$this->input->post ('contrasenia')
 		)) {
-			redirect (base_url().'obras/home'); 
+			redirect (base_url().'obras'); 
 		} else {
-			redirect (base_url().'home/log_in_form'); 
+			redirect (base_url().'user/log_in_form'); 
 		}
 	}
 
@@ -125,7 +125,7 @@ class user extends CI_Controller {
 			$errors ['user_info']['email'] = $email;
 
 			$this->session->set_flashdata('errors', json_encode($errors));
-			redirect(base_url().'home/create_form');
+			redirect(base_url().'user/create_form');
 		}
 
 		$this->user_model->create ( Array (
@@ -141,7 +141,7 @@ class user extends CI_Controller {
 			)
 		);
 			
-        redirect (base_url().'/home/log_in_form'); 
+        redirect (base_url().'user/log_in_form'); 
 	}
 
 }
