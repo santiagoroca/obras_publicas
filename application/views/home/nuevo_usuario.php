@@ -1,22 +1,12 @@
-<!--<div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <img src="/Content/img/ico_ciudadanodigital.png" alt="Ciudadano Digital" class="logocidi">
-                <h4>OBRAS PÚBLICAS</h4>
-                <h2>Registrate</h2>
-            <a href="http://www.cba.gov.ar/" target="_blank">
-                <img src="/Content/img/logo_gobcbamin.png" alt="Ministerio de Gestión Pública, Gobierno de la Provincia de Córdoba" class="logogob">
-            </a>
-        </div>
-    </div>-->
 <div class="row log-in">
   <div class="col-md-1"></div>
-  <div class="col-md-2 form-createuser">
+  <div class="col-md-3 form-createuser">
     
     <h2 class="form-create-user-title" >Nuevo Usuario</h2>
     
     <div class="page-header page-header-custom" ></div>
 
-    <form>
+    <form method="POST" action="<?=$action_url?>">
       <div class="form-group">
         <input name="usuario" class="form-control" placeholder="Usuario">
       </div>
