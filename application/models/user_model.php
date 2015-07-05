@@ -47,4 +47,15 @@ class user_model extends CI_Model {
 		return false;
 	}
 
+	public function user_exists ($user, &$errors) {
+		$query = $this->db->select ("id")
+			              ->from ("user")
+			              ->where ("user = '".$user."'")
+			              ->get();
+
+		if ($query->num_rows() > 0) {
+			$errors [] = "El usuario ya existe.";
+		}
+	}
+
 }

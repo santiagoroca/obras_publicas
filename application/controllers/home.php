@@ -11,23 +11,23 @@ class home extends CI_Controller {
 		$this->load->model("user_model");
 	}
 
-	private function loadContent ($view_name, $params) {
-		$this->load->view('commons/header');
+	private function loadContent ($view_name, $params, $header) {
+		$this->load->view('commons/header'.$header);
 		$this->load->view($view_name, $params);
 		$this->load->view('commons/footer');
 	}
 
 	private function checkPassword ($pwd, &$errors) {
 	    if (strlen($pwd) < 8) {
-	        $errors[] = "Password too short.";
+	        $errors[] = "La contraseña es demasiado corta.";
 	    }
 
 	    if (!preg_match("#[0-9]+#", $pwd)) {
-	        $errors[] = "Password must include at least one number.";
+	        $errors[] = "La contraseña debe incluir al menos un numero.";
 	    }
 
 	    if (!preg_match("#[a-zA-Z]+#", $pwd)) {
-	        $errors[] = "Password must include at least one letter.";
+	        $errors[] = "La contraseña debe incluir al menos una letra.";
 	    }     
 
 	    return $errors;
@@ -37,7 +37,7 @@ class home extends CI_Controller {
 		$this->loadContent ('home/home', Array (
 			'action_url' => 'log_in',
 			'new_user_url' => 'create_form'
-		));
+		), '_out');
 	}
 
 	public function create_form () {
@@ -46,11 +46,11 @@ class home extends CI_Controller {
 		$this->loadContent ('home/nuevo_usuario', Array (
 			'action_url' => 'create',
 			'errors' => isset($errors) ? json_decode($errors) : false
-		));
+		), '_out');
 	}
 
 	public function update_form () {
-		$this->loadContent ('home/modificar_usuario', Array ());
+		$this->loadContent ('home/modificar_usuario', Array (), '');
 	}
 
 	public function log_in () {
@@ -78,7 +78,9 @@ class home extends CI_Controller {
 			'errors' => Array ()
 		);
 
+		//Validations
 		$this->checkPassword ($password, $errors ['errors']);
+		$this->user_model->user_exists ($user, $errors ['errors']);
 
 		if ($errors) {
 			$errors ['user_info']['user'] = $user;
