@@ -21,7 +21,7 @@ class user_model extends CI_Model {
 		$this->db->trans_complete();
 
 		if ($user) {
-			$this->session->set_userdata($user);
+			$this->session->set_userdata('data', $user);
 			return true;
 		}
 
@@ -56,6 +56,15 @@ class user_model extends CI_Model {
 		if ($query->num_rows() > 0) {
 			$errors [] = "El usuario ya existe.";
 		}
+	}
+
+	public function update_user ($u_id, $password) {
+		$this->db->where('id', $u_id);
+		$uuid = uniqid();
+		$this->db->update('user', Array (
+			'hash' => hash ('sha512', $uuid.$password),
+			'salt' => $uuid
+		)); 
 	}
 
 }

@@ -50,8 +50,42 @@ class home extends CI_Controller {
 	}
 
 	public function update_form () {
-		$this->loadContent ('home/modificar_usuario', Array (), '');
+        $errors = $this->session->flashdata('errors');
+        $success = $this->session->flashdata('success');
+
+		$this->loadContent ('home/modificar_usuario', Array(
+            'data' => $this->session->all_userdata()['data'],
+            'action_url_profile_info' => 'update_profile',
+            'action_url_user_info' => 'update_user',
+            'errors' => $errors,
+            'success' => $success
+        ), '');
 	}
+
+    public function update_user () {
+        $password = $this->input->post ('contrasenia');
+        $data = Array (
+            'user_info' => Array (),
+            'errors' => Array ()
+        );
+
+        //Validations
+        $this->checkPassword ($password, $errors);
+
+        if ($errors) {
+            $this->session->set_flashdata('errors', json_encode($errors));
+            redirect(base_url().'home/update_form');
+        }
+
+        $this->user_model->update_user ($this->session->all_userdata()['data']->u_id, $password);
+        $this->session->set_flashdata('success', 'Su contraseña ha sido cambiada con exito.');
+
+        redirect (base_url().'home/update_form'); 
+    }
+
+    public function update_profile () {
+        redirect (base_url().'home/update_form'); 
+    }
 
 	public function log_in () {
 		if ($this->user_model->log_in (
@@ -73,11 +107,6 @@ class home extends CI_Controller {
 		$tel = $this->input->post ('telefono');
 		$email = $this->input->post ('email');
 
-		$data = Array (
-			'user_info' => Array (),
-			'errors' => Array ()
-		);
-
 		//Validations
 		$this->checkPassword ($password, $errors ['errors']);
 		$this->user_model->user_exists ($user, $errors ['errors']);
@@ -95,7 +124,7 @@ class home extends CI_Controller {
 			redirect(base_url().'home/create_form');
 		}
 
-		if ($this->user_model->create ( Array (
+		$this->user_model->create ( Array (
 				'user' => $user,
 				'hash' => $password
 			), Array (
@@ -106,11 +135,9 @@ class home extends CI_Controller {
 				'email' =>$email,
 				'type' => 1
 			)
-		)) {
-			redirect (base_url().'/home/log_in_form'); 
-		} else {
-			redirect ();
-		}
+		);
+			
+        redirect (base_url().'/home/log_in_form'); 
 	}
 
 }
