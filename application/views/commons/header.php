@@ -14,14 +14,14 @@
 	</head>
 	<body>
 		<div class="topbar">
-			<a href="<?=base_url()?>obras/list_form" class="header-link col-md-offset-3 col-md-6">
+			<a href="<?=base_url()?>obras/home" class="header-link col-md-offset-3 col-md-6">
 				<img class="img-height" alt="Obras Públicas Pcia. de Córdoba" src="<?=base_url()?>assets/img/topbar_logo.jpg" >
 			</a>
 		</div>
 		<nav class="navbar navbar-default bar-border-radius">
 			<div class="container-fluid col-md-6 col-md-offset-3">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="<?=base_url()?>obras/list_form">Obras</a>
+					<a class="navbar-brand" href="<?=base_url()?>obras/home">Obras</a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
