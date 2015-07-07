@@ -37,17 +37,21 @@ class user extends CI_Controller {
 	    return $errors;
 	}
 
+	private function update_session () {
+		$this->user_model->update_session ($this->session->all_userdata()['data']->u_id);
+	}
+
 	public function log_in_form () {
-		$this->loadContent ('user/home', Array (
-			'action_url' => 'log_in',
-			'new_user_url' => 'create_form'
+		$this->loadContent ('home/home', Array (
+			'action_url' => 'user/log_in',
+			'new_user_url' => 'user/create_form'
 		), '_out');
 	}
 
 	public function create_form () {
 		$errors = $this->session->flashdata('errors');
 
-		$this->loadContent ('user/nuevo_usuario', Array (
+		$this->loadContent ('home/nuevo_usuario', Array (
 			'action_url' => 'create',
 			'errors' => isset($errors) ? json_decode($errors) : false
 		), '_out');
@@ -57,7 +61,7 @@ class user extends CI_Controller {
         $errors = $this->session->flashdata('errors');
         $success = $this->session->flashdata('success');
 
-		$this->loadContent ('user/modificar_usuario', Array(
+		$this->loadContent ('home/modificar_usuario', Array(
             'data' => $this->session->all_userdata()['data'],
             'action_url_profile_info' => 'update_profile',
             'action_url_user_info' => 'update_user',
@@ -78,7 +82,7 @@ class user extends CI_Controller {
 
         if ($errors) {
             $this->session->set_flashdata('errors', json_encode($errors));
-            redirect(base_url().'home/update_form');
+            redirect(base_url().'user/update_form');
         }
 
         $this->user_model->update_user ($this->session->all_userdata()['data']->u_id, $password);
@@ -88,6 +92,25 @@ class user extends CI_Controller {
     }
 
     public function update_profile () {
+		$name = $this->input->post ('nombre');
+		$last_name = $this->input->post ('apellido');
+		$address = $this->input->post ('direccion');
+		$tel = $this->input->post ('telefono');
+		$email = $this->input->post ('email');
+		$birth_date = $this->input->post ('fecha_de_nacimiento');
+
+        $this->user_model->update_profile ($this->session->all_userdata()['data']->u_id, Array (
+				'name' => $name,
+				'last_name' => $last_name,
+				'address' => $address,
+				'tel' => $tel,
+				'email' =>$email,
+				'birth_date' => $birth_date
+			)
+		);
+			
+        $this->update_session ();
+
         redirect (base_url().'user/update_form'); 
     }
 
@@ -110,12 +133,13 @@ class user extends CI_Controller {
 		$address = $this->input->post ('direccion');
 		$tel = $this->input->post ('telefono');
 		$email = $this->input->post ('email');
+		$birth_date = $this->input->post ('fecha_de_nacimiento');
 
 		//Validations
 		$this->checkPassword ($password, $errors ['errors']);
 		$this->user_model->user_exists ($user, $errors ['errors']);
 
-		if ($errors) {
+		if ($errors ['errors']) {
 			$errors ['user_info']['user'] = $user;
 			$errors ['user_info']['password'] = $password;
 			$errors ['user_info']['name'] = $name;
@@ -137,7 +161,8 @@ class user extends CI_Controller {
 				'address' => $address,
 				'tel' => $tel,
 				'email' =>$email,
-				'type' => 1
+				'type' => 1,
+				'birth_date' => $birth_date
 			)
 		);
 			

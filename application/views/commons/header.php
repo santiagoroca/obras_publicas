@@ -2,9 +2,9 @@
 	
 	<head>
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.css">
 		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap-theme.min.css">
 		<!-- Custom Styles -->
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/styles.css">
 		<!-- Jquery -->
@@ -13,10 +13,12 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<div class="topbar">
-			<a href="<?=base_url()?>obras/home" class="header-link col-md-offset-3 col-md-6">
-				<img class="img-height" alt="Obras Públicas Pcia. de Córdoba" src="<?=base_url()?>assets/img/topbar_logo.jpg" >
-			</a>
+		<div class="topbar-image">
+			<div class="topbar col-md-offset-3">
+				<a href="<?=base_url()?>obras/home" class="header-link">
+					<img class="img-height" alt="Obras Públicas Pcia. de Córdoba" src="<?=base_url()?>assets/img/topbar_logo.jpg" >
+				</a>
+			</div>
 		</div>
 		<nav class="navbar navbar-default bar-border-radius">
 			<div class="container-fluid col-md-6 col-md-offset-3">
@@ -32,13 +34,15 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Cuenta<span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Mis Datos</a></li>
-								<li><a href="#">Cargar Obra</a></li>
+								<li><a href="<?=base_url()?>user/update_form">Mis Datos</a></li>
+								<li><a href="<?=base_url()?>obras/create_form">Cargar Obra</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="#">Salir</a></li>
 							</ul>
 						</li>
 					</ul>
-					</div><!-- /.navbar-collapse -->
-					</div><!-- /.container-fluid -->
-				</nav>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+		<div class="col-md-offset-3 col-md-6 page-body">
+			<div class="content">

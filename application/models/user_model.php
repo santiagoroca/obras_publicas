@@ -36,7 +36,7 @@ class user_model extends CI_Model {
 		$user_data ['salt'] = $uuid;
 		$user = $this->db->insert ('user', $user_data);
 
-		$profile ['user_id'] = $this->db->insert_id();
+		$profile_data ['user_id'] = $this->db->insert_id();
 		$profile = $this->db->insert ('profile', $profile_data);
 		$this->db->trans_complete();
 
@@ -65,6 +65,31 @@ class user_model extends CI_Model {
 			'hash' => hash ('sha512', $uuid.$password),
 			'salt' => $uuid
 		)); 
+	}
+
+	public function update_profile ($u_id, $data) {
+		$this->db->where('user_id', $u_id);
+		$this->db->update('profile', $data); 
+	}
+
+	public function update_session ($id) {
+
+		$this->db->trans_start();
+		$user = $this->db->select ('user.id as u_id, user, name, last_name, address, tel, email, type, birth_date')
+						 ->from ('user')
+						 ->join ('profile', 'user.id = profile.user_id', 'LEFT')
+						 ->where ('user.id = "'.$id.'"')
+						 ->get ()
+						 ->row ();
+		$this->db->trans_complete();
+
+		if ($user) {
+			$this->session->set_userdata('data', $user);
+			return true;
+		}
+
+		return false;
+
 	}
 
 }
