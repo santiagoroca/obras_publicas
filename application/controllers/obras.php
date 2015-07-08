@@ -51,7 +51,7 @@ class obras extends CI_Controller {
 
 	public function home ($id = "") {
 		$this->loadContent ('obras/listar', Array (
-			'data' => $this->obras_model->get ($id)
+			//'data' => $this->obras_model->get ($id)
 		), '');
 	}
 
