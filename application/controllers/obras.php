@@ -49,8 +49,43 @@ class obras extends CI_Controller {
 		), '');
 	}
 
-	public function home () {
-		$this->loadContent ('obras/listar', Array (), '');
+	public function home ($id = "") {
+		$this->loadContent ('obras/listar', Array (
+			'data' => $this->obras_model->get ($id)
+		), '');
+	}
+
+	public function create () {
+		$this->obras_model->create (
+			Array (
+				'title' => $this->input->post ('title'),
+				's_desc' => $this->input->post ('s_desc'),
+				'l_desc_a' => $this->input->post ('l_desc_a'),
+				'l_desc_b' => $this->input->post ('l_desc_b'),
+				'progress' => $this->input->post ('progress'),
+				'tag' => $this->input->post ('tag'),
+				'image' => $this->input->post ('image'),
+				'owner' => $this->session->all_userdata()['data']->u_id
+			),
+			$this->input->post ('misc_images'),
+			$this->input->post ('extra_info')
+		);
+	}
+
+	public function update ($id) {
+		$this->obras_model->update (
+			Array (
+				$this->input->post ('title'),
+				$this->input->post ('s_desc'),
+				$this->input->post ('l_desc_a'),
+				$this->input->post ('l_desc_b'),
+				$this->input->post ('progress'),
+				$this->input->post ('tag'),
+				$this->input->post ('image')
+			),
+			$this->input->post ('extra_info'),
+			$id
+		);	
 	}
 
 }

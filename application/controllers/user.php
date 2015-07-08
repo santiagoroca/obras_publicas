@@ -18,7 +18,7 @@ class user extends CI_Controller {
 	private function loadContent ($view_name, $params, $header) {
 		$this->load->view('commons/header'.$header);
 		$this->load->view($view_name, $params);
-		$this->load->view('commons/footer');
+		$this->load->view('commons/footer'.$header);
 	}
 
 	private function checkPassword ($pwd, &$errors) {
