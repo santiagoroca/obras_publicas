@@ -11,7 +11,7 @@ class obras extends CI_Controller {
 		$this->load->model("obras_model");
 	}
 
-	private function loadContent ($view_name, $params, $header) {
+	private function loadContent ($view_name, $params, $header = '') {
 		$this->load->view('commons/header'.$header);
 		$this->load->view($view_name, $params);
 		$this->load->view('commons/footer');
@@ -40,28 +40,28 @@ class obras extends CI_Controller {
 	public function create_form () {
 		$this->loadContent ('obras/crear', Array (
 			'action_url' => 'create'
-		), '');
+		));
 	}
 
 	public function update_form () {
 		$this->loadContent ('obras/editar', Array (
 			'action_url' => 'update'
-		), '');
+		));
 	}
 
 	public function home ($id = "") {
 		$this->loadContent ('obras/listar', Array (
-			//'data' => $this->obras_model->get ($id)
-		), '');
+			'data' => $this->obras_model->get ($id)
+		));
 	}
 
 	public function create () {
 		$this->obras_model->create (
 			Array (
-				'title' => $this->input->post ('title'),
-				's_desc' => $this->input->post ('s_desc'),
-				'l_desc_a' => $this->input->post ('l_desc_a'),
-				'l_desc_b' => $this->input->post ('l_desc_b'),
+				'titulo_obra' => $this->input->post ('title'),
+				'breve_descripcion' => $this->input->post ('s_desc'),
+				'descripcion_detallada_a' => $this->input->post ('l_desc_a'),
+				'descripcion_detallada_b' => $this->input->post ('l_desc_b'),
 				'progress' => $this->input->post ('progress'),
 				'tag' => $this->input->post ('tag'),
 				'image' => $this->input->post ('image'),

@@ -135,6 +135,16 @@ CREATE TABLE IF NOT EXISTS `works` (
   `l_desc_a` varchar(10000) NOT NULL,
   `l_desc_b` varchar(10000) NOT NULL,
   `progress` int(11) NOT NULL,
+  `owner` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `high_profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `priority` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `entity` varchar(10000) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

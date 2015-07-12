@@ -55,7 +55,7 @@ body {
 .topbar-image {
 	background-image: url("../img/header_image.png");
 	background-size: cover;
-	height: 600px;	
+	height: 80%;	
 	position: absolute;
 	width: 100%;
 }
@@ -152,4 +152,17 @@ label {
 
 .img-social-network:hover {
 	animation-name: rotate-social-network;
+}
+
+
+.image_carrousel {
+	width: 100%;
+	height: 180px;
+	font-size: 50px;
+	text-align: center;
+}
+
+.image_carrousel:before {
+	top: 40%;
+	position: relative;
 }
