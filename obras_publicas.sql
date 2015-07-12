@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `profile` (
   `tel` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `type` int(11) NOT NULL,
+  `birthdate` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
@@ -112,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `d` datetime NOT NULL,
   `u` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `active` int(11) NOT NULL DEFAULT '1',
+  `birth_date` varchar(255) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
@@ -136,17 +138,22 @@ CREATE TABLE IF NOT EXISTS `works` (
   `l_desc_b` varchar(10000) NOT NULL,
   `progress` int(11) NOT NULL,
   `owner` int(11) NOT NULL,
+  `tags` varchar(10000) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
 CREATE TABLE IF NOT EXISTS `high_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `priority` int(11) NOT NULL,
+  `id_profile` int(11) NOT NULL,
   `type` int(11) NOT NULL,
   `entity` varchar(10000) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+INSERT INTO `high_profile` (`id_profile`, `type`, `entity`) VALUES
+(5, 0, 'Municipalidad de Cordoba');
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

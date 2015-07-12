@@ -9,6 +9,8 @@ class user extends CI_Controller {
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->model("user_model");
+
+		date_default_timezone_set('America/Argentina/Buenos_Aires');
 	}
 
     public function index () {
@@ -154,7 +156,10 @@ class user extends CI_Controller {
 
 		$this->user_model->create ( Array (
 				'user' => $user,
-				'hash' => $password
+				'hash' => $password,
+				'u' => date('Y/m/d h:i:s', time()),
+				'c' => date('Y/m/d h:i:s', time()),
+				'd' => date('Y/m/d h:i:s', time())
 			), Array (
 				'name' => $name,
 				'last_name' => $last_name,

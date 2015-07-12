@@ -12,9 +12,11 @@ class user_model extends CI_Model {
 
 		$this->db->trans_start();
 		$user = $this->db->query ('
-			SELECT user.id as u_id, user, name, last_name, address, tel, email, type
+			SELECT user.id as u_id, user, name, last_name, address, tel, email,
+			profile.type as t_user, high_profile.type as p_member, high_profile.id h_id
 			FROM user
 			LEFT JOIN profile ON user.id = profile.user_id
+			LEFT JOIN high_profile ON high_profile.id_profile = profile.id
 			WHERE SHA2(CONCAT(user.salt, "'.$p.'"), 512) = user.hash
 				AND user.user = "'.$u.'"
 		')->row();

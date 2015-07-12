@@ -9,12 +9,12 @@
     <input required name="breve_descripcion" class="form-control" placeholder="Breve Descripción">
   </div>
   <div class="form-group">
-    <textarea name="descripcion_detallada_a" class="form-control avoidresize" rows="3" placeholder="Descripción Detallada"></textarea>
+    <textarea name="descripcion_detallada_a" class="form-control avoidresize" rows="5" placeholder="Descripción Detallada"></textarea>
   </div>
   <div class="page-header">
     <h4>Seccion Inferior</h4>
   </div>
-  <textarea name="descripcion_detallada_b" class="form-control avoidresize" rows="3" placeholder="Descripción Detallada"></textarea>
+  <textarea name="descripcion_detallada_b" class="form-control avoidresize" rows="5" placeholder="Descripción Detallada"></textarea>
   <div class="form-group">
     <label class="log-in">Añade una foto de la Obra.</label>
     <input type="file" id="exampleInputFile">
@@ -24,7 +24,7 @@
     <h4>Informacion Extra</h4>
   </div>
   <div class="form-group">
-    <button id="add_button" type="button" class="btn btn-success pull-right">Agregar</button>
+    <button id="add_button" type="button" class="btn btn-success">Agregar</button>
   </div>
   <div id="container" class="row form-group"></div>
   <div class="page-header">
@@ -33,6 +33,7 @@
   <div class="progress">
     <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
       <span class="sr-only"></span>
+      <input id="progress_bar" value="0" type="hidden" name="progreso" />
     </div>
   </div>
   <div class="form-group">
@@ -43,7 +44,7 @@
   </div>
 </form>
 <script type="text/template" id="template">
-<div class="col-md-4">
+<div class="col-md-3">
   <div class="thumbnail">
     <span class="image_carrousel glyphicon glyphicon-minus" data-id="<%= index %>"></span>
     <div class="caption">
@@ -63,8 +64,18 @@ $ (document).ready (function () {
   var template = _.template($("#template").html());
   var indexOf = 0;
   var icons = [
-  'image_carrousel glyphicon glyphicon-minus',
-  'image_carrousel glyphicon glyphicon-eur',
+    'image_carrousel glyphicon glyphicon-piggy-bank',
+    'image_carrousel glyphicon glyphicon-stats',
+    'image_carrousel glyphicon glyphicon-phone-alt',
+    'image_carrousel glyphicon glyphicon-flash',
+    'image_carrousel glyphicon glyphicon-shopping-cart',
+    'image_carrousel glyphicon glyphicon-fire',
+    'image_carrousel glyphicon glyphicon-calendar',
+    'image_carrousel glyphicon glyphicon-remove-circle',
+    'image_carrousel glyphicon glyphicon-ok-circle',
+    'image_carrousel glyphicon glyphicon-off',
+    'image_carrousel glyphicon glyphicon-road',
+    'image_carrousel glyphicon glyphicon-tree-conifer'
   ];
 
   $ ("#add_button").click (function () {
@@ -85,6 +96,7 @@ $ (document).ready (function () {
     var c = e.offsetX;
     var t = $ (this).parent().width ();
     $ ('.progress-bar').width (parseInt (c * 101 / t) + "%");
+    $ ('#progress_bar').val (parseInt (c * 101 / t));
   });
 
 });

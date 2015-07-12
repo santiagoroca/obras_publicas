@@ -55,7 +55,7 @@ body {
 .topbar-image {
 	background-image: url("../img/header_image.png");
 	background-size: cover;
-	height: 80%;	
+	height: 100%;	
 	position: absolute;
 	width: 100%;
 }
@@ -101,6 +101,7 @@ body {
 	width: 100%;
 	z-index: 10000;
 	margin-top: 0px;
+	border: none;
 }
 
 .btn {
@@ -158,11 +159,46 @@ label {
 .image_carrousel {
 	width: 100%;
 	height: 180px;
-	font-size: 50px;
+	font-size: 100px;
 	text-align: center;
+	background: #f4f4f4
 }
 
 .image_carrousel:before {
-	top: 40%;
+	top: 20%;
 	position: relative;
+}
+
+.media a, .media-high a {
+	color: #777;
+	text-decoration: none;
+}
+
+.media, .media-high {
+	padding: 5px	
+}
+
+.media:hover {
+	background: #e7e7e7;
+}
+
+.media-high {
+	-webkit-box-shadow: 0px 0px 19px 0px rgba(56, 56, 56, 1);
+	-moz-box-shadow:    0px 0px 19px 0px rgba(56, 56, 56, 1);
+	box-shadow:         0px 0px 19px 0px rgba(56, 56, 56, 1);
+	margin: 15px 0 15px;
+}
+
+.list-progress {
+	height: 10px;
+	border-radius: 0px;
+	margin:58px 0px 0px;
+}
+
+.media-title {
+	margin-top: 7px;
+}
+
+.p-media-body {
+	height: 10px;
 }

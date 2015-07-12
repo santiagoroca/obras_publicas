@@ -39,37 +39,44 @@ class obras extends CI_Controller {
 
 	public function create_form () {
 		$this->loadContent ('obras/crear', Array (
-			'action_url' => 'create'
+			'action_url' => base_url().'obras/create'
 		));
 	}
 
-	public function update_form () {
+	public function update_form ($id) {
+		if (!$this->obras_model->its_mine (
+			$this->session->all_userdata()['data']->h_id, $id
+		)) redirect (base_url().'obras/mylist');
+
 		$this->loadContent ('obras/editar', Array (
-			'action_url' => 'update'
+			'action_url' => base_url().'obras/update',
+			'data' => $this->obras_model->get ($id, true),
+			'extra_info' => $this->obras_model->get_extra_info ($id)
 		));
 	}
 
 	public function home ($id = "") {
 		$this->loadContent ('obras/listar', Array (
-			'data' => $this->obras_model->get ($id)
+			'data' => $this->obras_model->get ()
 		));
 	}
 
 	public function create () {
 		$this->obras_model->create (
 			Array (
-				'titulo_obra' => $this->input->post ('title'),
-				'breve_descripcion' => $this->input->post ('s_desc'),
-				'descripcion_detallada_a' => $this->input->post ('l_desc_a'),
-				'descripcion_detallada_b' => $this->input->post ('l_desc_b'),
-				'progress' => $this->input->post ('progress'),
-				'tag' => $this->input->post ('tag'),
-				'image' => $this->input->post ('image'),
-				'owner' => $this->session->all_userdata()['data']->u_id
+				'title' => $this->input->post ('titulo_obra'),
+				's_desc' => $this->input->post ('breve_descripcion'),
+				'l_desc_a' => $this->input->post ('descripcion_detallada_a'),
+				'l_desc_b' => $this->input->post ('descripcion_detallada_b'),
+				'progress' => $this->input->post ('progreso'),
+				'tags' => $this->input->post ('tag'),
+				'owner' => $this->session->all_userdata()['data']->h_id
 			),
 			$this->input->post ('misc_images'),
-			$this->input->post ('extra_info')
+			$this->input->post ('info_extra')
 		);
+
+		redirect (base_url ().'obras/mylist');
 	}
 
 	public function update ($id) {
@@ -83,9 +90,17 @@ class obras extends CI_Controller {
 				$this->input->post ('tag'),
 				$this->input->post ('image')
 			),
-			$this->input->post ('extra_info'),
+			$this->input->post ('info_extra'),
 			$id
 		);	
+	}
+
+	public function mylist () {
+        $this->loadContent ('obras/mylist', Array (
+    		'data' => $this->obras_model->get (
+    			$this->session->all_userdata()['data']->h_id
+    		)
+    	));
 	}
 
 }

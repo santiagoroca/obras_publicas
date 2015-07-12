@@ -15,18 +15,18 @@ class obras_model extends CI_Model {
 		$this->db->insert ('works', $work);
 		$i_id = $this->db->insert_id ();
 
-		foreach ($images as $image) {
+		/*foreach ($images as $image) {
 			$this->db->insert ('extra_image', Array (
 				'id_work' => $i_id,
 				'path' => $image
 			));
-		}
+		}*/
 
-		foreach ($infos as $info) {
-			$this->db->insert ('extra_image', Array (
+		foreach ($infos as $k => $info) {
+			$this->db->insert ('extra_info', Array (
 				'id_work' => $i_id,
 				'title' => $info ['title'],
-				'desc' => $info ['desc'],
+				'desc' => $info ['description'],
 				'icon' => $info ['icon']
 			));
 		}
@@ -47,7 +47,7 @@ class obras_model extends CI_Model {
 
 			$this->db->update ('extra_image', Array (
 				'title' => $info ['title'],
-				'desc' => $info ['desc']
+				'desc' => $info ['description']
 			));
 		}
 
@@ -55,13 +55,38 @@ class obras_model extends CI_Model {
 
 	}
 
-	public function get ($id) {
-		$list = $this->db->select ('works.*, high_profile.type as priority') 
+	public function get ($id = "", $one = false) {
+		$this->db->select ('works.*, high_profile.type as priority') 
 						->from ('works')
 						->join ('high_profile', 'works.owner = high_profile.id', 'LEFT');
 
-		if ($id != "") $this->db->where ('works.owner', $id);
+		if ($id != "" && !$one) { $this->db->where ('works.owner', $id); }
 
+		if ($id != "" && $one) {
+			$this->db->where ('works.id', $id)->limit (1); 
+
+			return $this->db->get ()
+				        ->row ();
+		}
+
+		return $this->db->get ()
+				        ->result ();
+	}
+
+	public function its_mine ($u_id, $w_id) {
+				$this->db->select ('works.*') 
+						->from ('works')
+						->where ('works.id', $w_id)
+						->where ('works.owner', $u_id);
+
+		return $this->db->get ()->num_rows () == 1;
+	}
+
+	public function get_extra_info ($id) {
+		$this->db->select ('*') 
+						->from ('extra_info')
+						->where ('extra_info.id_work', $id);
+						
 		return $this->db->get ()
 				        ->result ();
 	}

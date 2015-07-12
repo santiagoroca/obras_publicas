@@ -10,6 +10,8 @@
 		<!-- Jquery -->
 		<script src="<?=base_url()?>assets/js/jquery-2.1.4.min.js"></script>
 		<!-- Underscore -->
+		<script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
+		<!-- Underscore -->
 		<script src="<?=base_url()?>assets/js/underscore.js"></script>
 	</head>
 	<body>
@@ -36,6 +38,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="<?=base_url()?>user/update_form">Mis Datos</a></li>
 								<li><a href="<?=base_url()?>obras/create_form">Cargar Obra</a></li>
+								<li><a href="<?=base_url()?>obras/mylist">Mis Obras</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="#">Salir</a></li>
 							</ul>
