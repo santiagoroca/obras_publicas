@@ -174,4 +174,9 @@ class user extends CI_Controller {
         redirect (base_url().'user/log_in_form'); 
 	}
 
+	public function logout () {
+		$this->session->sess_destroy();
+		redirect (base_url().'user'); 
+	}
+
 }

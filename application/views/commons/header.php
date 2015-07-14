@@ -40,7 +40,7 @@
 								<li><a href="<?=base_url()?>obras/create_form">Cargar Obra</a></li>
 								<li><a href="<?=base_url()?>obras/mylist">Mis Obras</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="#">Salir</a></li>
+								<li><a href="<?=base_url()?>user/logout">Salir</a></li>
 							</ul>
 						</li>
 					</ul>

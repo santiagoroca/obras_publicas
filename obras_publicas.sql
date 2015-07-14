@@ -72,7 +72,8 @@ CREATE TABLE IF NOT EXISTS `profile` (
 --
 
 INSERT INTO `profile` (`id`, `user_id`, `name`, `last_name`, `address`, `tel`, `email`, `type`) VALUES
-(5, 0, 'Santiago', 'Roca', 'Lagunilla 2250', '03525482703', 'snroca@hotmail.com', 1);
+(1, 1, 'Santiago', 'Roca', 'Lagunilla 2250', '03525482703', 'snroca@hotmail.com', 1),
+(2, 2, 'Paula', 'Bustamante', 'Lagunilla 2250', '03525482703', 'snroca@hotmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +123,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `user`, `hash`, `salt`, `c`, `d`, `u`, `active`) VALUES
-(9, 'santiiiii', '81cb0164b1115f853c93ebd9378875f30384522144a58192cd008bcec4c0c46b3992cfa96f4da03b3f333323c823cad2fc18b1d015150e3d7f04cd5888edea46', '55989014bb9ca', '2015-07-05 02:01:56', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
+(1, 'santiiiii', '81cb0164b1115f853c93ebd9378875f30384522144a58192cd008bcec4c0c46b3992cfa96f4da03b3f333323c823cad2fc18b1d015150e3d7f04cd5888edea46', '55989014bb9ca', '2015-07-05 02:01:56', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1),
+(2, 'pauuuuu', '81cb0164b1115f853c93ebd9378875f30384522144a58192cd008bcec4c0c46b3992cfa96f4da03b3f333323c823cad2fc18b1d015150e3d7f04cd5888edea46', '55989014bb9ca', '2015-07-05 02:01:56', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -142,6 +144,16 @@ CREATE TABLE IF NOT EXISTS `works` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+INSERT INTO `works` (`title`, `s_desc`, `l_desc_a`, `l_desc_b`, `progress`, `owner`, `tags`) VALUES 
+('Cloacas Barrio Parque', 'Se realizo un sistema de cloacas para barrio Parque para evitar las frecuentes inundaciones.', '', '', 100, 1, ''),
+('Tendido Electrico', 'Ante la demanda de electricidad se realizo un tendido electrico.', '', '', 100, 1, ''),
+('Puente Sinsacate', 'Luego de las fuertes lluvias se planea reconstruir el puente a Sinsacate.', '', '', 0, 2, ''),
+('Otra Obra', 'Se realizo otra obra muy importante para colonia caroya.', '', '', 100, 2, ''),
+('Destacamento', 'Se esta trabajando en el Destacamento.', '', '', 75, 1, ''),
+('Cloacas Colonia Caroya', 'Se realizo un sistema de cloacas para barrio Parque para evitar las frecuentes inundaciones.', '', '', 83, 2, ''),
+('Remodelacion Estatuas', 'Esta es la descripcion de esta obra que me sirve para ver como queda.', '', '', 100, 1, ''),
+('Cloacas Barrio Parque', 'Se realizo un sistema de cloacas para barrio Parque para evitar las frecuentes inundaciones.', '', '', 35, 2, '');
+
 
 CREATE TABLE IF NOT EXISTS `high_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -151,8 +163,8 @@ CREATE TABLE IF NOT EXISTS `high_profile` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
-INSERT INTO `high_profile` (`id_profile`, `type`, `entity`) VALUES
-(5, 0, 'Municipalidad de Cordoba');
+INSERT INTO `high_profile` (`id_profile`, `type`, `entity`) VALUES 
+(1, 1, 'Municipalidad de Cordoba'), (2, 0, 'Municipalidad de Colonia Caroya');
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
