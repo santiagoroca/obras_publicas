@@ -256,3 +256,22 @@ label {
 	font-size: 19px;
 	transition: all 0.4s;
 }
+
+.premium-bg{
+background:rgba(255,248,220,0.5);
+}
+
+.corner-ribbon {
+        content           : "";
+        display           : block;
+        height            : 72px;
+        width             : 13px;
+        position          : relative;
+        bottom            : 90px;
+        left              : 154px;
+        transform         : rotate(45deg);
+        -ms-transform     : rotate(45deg);
+        -moz-transform    : rotate(45deg);
+        -webkit-transform : rotate(-45deg);
+        -o-transform      : rotate(45deg)
+}
