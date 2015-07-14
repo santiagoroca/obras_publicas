@@ -7,6 +7,9 @@
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap-theme.min.css">
 		<!-- Custom Styles -->
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/styles.css">
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/styles_theme.css">
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/animate.css">
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/isotope.css">
 		<!-- Jquery -->
 		<script src="<?=base_url()?>assets/js/jquery-2.1.4.min.js"></script>
 		<!-- Underscore -->

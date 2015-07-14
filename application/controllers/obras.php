@@ -17,6 +17,12 @@ class obras extends CI_Controller {
 		$this->load->view('commons/footer');
 	}
 
+	private function loadContentPremium ($view_name, $params) {
+		$this->load->view('commons/premium/header');
+		$this->load->view($view_name, $params);
+		$this->load->view('commons/premium/footer');
+	}
+
 	private function checkPassword ($pwd, &$errors) {
 	    if (strlen($pwd) < 8) {
 	        $errors[] = "La contraseña es demasiado corta.";
@@ -106,6 +112,10 @@ class obras extends CI_Controller {
     			$this->session->all_userdata()['data']->h_id
     		)
     	));
+	}
+
+	public function load () {
+		$this->loadContentPremium ('obras/premium/home', Array ());
 	}
 
 }
