@@ -7,9 +7,6 @@
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap-theme.min.css">
 		<!-- Custom Styles -->
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/styles.css">
-		<link rel="stylesheet" href="<?=base_url()?>assets/css/styles_theme.css">
-		<link rel="stylesheet" href="<?=base_url()?>assets/css/animate.css">
-		<link rel="stylesheet" href="<?=base_url()?>assets/css/isotope.css">
 		<!-- Jquery -->
 		<script src="<?=base_url()?>assets/js/jquery-2.1.4.min.js"></script>
 		<!-- Underscore -->
@@ -19,12 +16,13 @@
 	</head>
 	<body>
 		<div class="topbar-image">
-			<div class="topbar col-md-offset-3">
+			<div class="topbar col-md-offset-2 col-md-8">
 				<h1 class="title-header">ARGENTINA EN OBRAS</h1>
+				<h3 class="subtitle-header">Todas las obras públicas naciones, provinciales y municipales.<h3>
 			</div>
 		</div>
 		<nav class="navbar navbar-default bar-border-radius">
-			<div class="container-fluid col-md-6 col-md-offset-3">
+			<div class="container-fluid col-md-8 col-md-offset-2">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="<?=base_url()?>obras/home">Argentina en obras</a>
 				</div>
@@ -48,5 +46,5 @@
 				</div>
 			</div>
 		</nav>
-		<div class="col-md-offset-3 col-md-6 page-body">
+		<div class="col-md-offset-2 col-md-8 page-body">
 			<div class="content">

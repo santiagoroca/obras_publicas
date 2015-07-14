@@ -1,5 +1,5 @@
 <div class="page-header page-header-custom" >
-  <h1 class="update-user-title" >Cargar nueva Obra</h1>
+  <h1 class="update-user-title" >CARGAR OBRA</h1>
 </div>
 <form method="POST" action="<?=$action_url?>/<?=$data->id?>">
   <div class="form-group">

@@ -1,5 +1,5 @@
 <div class="page-header page-header-custom" >
-  <h1 class="update-user-title" >Cargar nueva Obra</h1>
+  <h1 class="update-user-title" >CARGAR OBRA</h1>
 </div>
 <form method="POST" action="<?=$action_url?>">
   <div class="form-group">
@@ -14,7 +14,9 @@
   <div class="page-header">
     <h4>Seccion Inferior</h4>
   </div>
-  <textarea name="descripcion_detallada_b" class="form-control avoidresize" rows="5" placeholder="Descripción Detallada"></textarea>
+  <div class="form-group">
+    <textarea name="descripcion_detallada_b" class="form-control avoidresize" rows="5" placeholder="Descripción Detallada"></textarea>
+  </div>
   <div class="form-group">
     <label class="log-in">Añade una foto de la Obra.</label>
     <input type="file" id="exampleInputFile">
@@ -61,43 +63,39 @@
 </script>
 <script>
 $ (document).ready (function () {
-  var template = _.template($("#template").html());
-  var indexOf = 0;
-  var icons = [
-    'image_carrousel glyphicon glyphicon-piggy-bank',
-    'image_carrousel glyphicon glyphicon-stats',
-    'image_carrousel glyphicon glyphicon-phone-alt',
-    'image_carrousel glyphicon glyphicon-flash',
-    'image_carrousel glyphicon glyphicon-shopping-cart',
-    'image_carrousel glyphicon glyphicon-fire',
-    'image_carrousel glyphicon glyphicon-calendar',
-    'image_carrousel glyphicon glyphicon-remove-circle',
-    'image_carrousel glyphicon glyphicon-ok-circle',
-    'image_carrousel glyphicon glyphicon-off',
-    'image_carrousel glyphicon glyphicon-road',
-    'image_carrousel glyphicon glyphicon-tree-conifer'
-  ];
-
-  $ ("#add_button").click (function () {
-    $ ("#container").append (template({
-      index: indexOf++
-    }));
-  });
-
-  $ (document).delegate ('.image_carrousel', 'click', function () {
-    var id = $ (this).data ('id');
-    var val = parseInt ($ ('#i_name_' + id).val ()) + 1;
-    var val = val == icons.length ? 0 : val;
-    $ ('#i_name_' + id).val (val);
-    $ (this).attr ('class', icons[val]);
-  });
-
-  $ ('.progress').click (function (e) {
-    var c = e.offsetX;
-    var t = $ (this).parent().width ();
-    $ ('.progress-bar').width (parseInt (c * 101 / t) + "%");
-    $ ('#progress_bar').val (parseInt (c * 101 / t));
-  });
-
+var template = _.template($("#template").html());
+var indexOf = 0;
+var icons = [
+'image_carrousel glyphicon glyphicon-piggy-bank',
+'image_carrousel glyphicon glyphicon-stats',
+'image_carrousel glyphicon glyphicon-phone-alt',
+'image_carrousel glyphicon glyphicon-flash',
+'image_carrousel glyphicon glyphicon-shopping-cart',
+'image_carrousel glyphicon glyphicon-fire',
+'image_carrousel glyphicon glyphicon-calendar',
+'image_carrousel glyphicon glyphicon-remove-circle',
+'image_carrousel glyphicon glyphicon-ok-circle',
+'image_carrousel glyphicon glyphicon-off',
+'image_carrousel glyphicon glyphicon-road',
+'image_carrousel glyphicon glyphicon-tree-conifer'
+];
+$ ("#add_button").click (function () {
+$ ("#container").append (template({
+index: indexOf++
+}));
+});
+$ (document).delegate ('.image_carrousel', 'click', function () {
+var id = $ (this).data ('id');
+var val = parseInt ($ ('#i_name_' + id).val ()) + 1;
+var val = val == icons.length ? 0 : val;
+$ ('#i_name_' + id).val (val);
+$ (this).attr ('class', icons[val]);
+});
+$ ('.progress').click (function (e) {
+var c = e.offsetX;
+var t = $ (this).parent().width ();
+$ ('.progress-bar').width (parseInt (c * 101 / t) + "%");
+$ ('#progress_bar').val (parseInt (c * 101 / t));
+});
 });
 </script>
