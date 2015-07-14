@@ -15,13 +15,6 @@ class obras_model extends CI_Model {
 		$this->db->insert ('works', $work);
 		$i_id = $this->db->insert_id ();
 
-		/*foreach ($images as $image) {
-			$this->db->insert ('extra_image', Array (
-				'id_work' => $i_id,
-				'path' => $image
-			));
-		}*/
-
 		foreach ($infos as $k => $info) {
 			$this->db->insert ('extra_info', Array (
 				'id_work' => $i_id,
@@ -45,7 +38,7 @@ class obras_model extends CI_Model {
 		foreach ($infos as $info) {
 			$this->db->where ('id', $info ['id']);
 
-			$this->db->update ('extra_image', Array (
+			$this->db->update ('extra_info', Array (
 				'title' => $info ['title'],
 				'desc' => $info ['description']
 			));
@@ -56,9 +49,10 @@ class obras_model extends CI_Model {
 	}
 
 	public function get ($id = "", $one = false) {
-		$this->db->select ('works.*, high_profile.type as priority') 
+		$this->db->select ('works.*, high_profile.type as priority, high_profile.entity, profile.name, profile.last_name') 
 						->from ('works')
-						->join ('high_profile', 'works.owner = high_profile.id', 'LEFT');
+						->join ('high_profile', 'works.owner = high_profile.id', 'LEFT')
+						->join ('profile', 'high_profile.id_profile = profile.id', 'LEFT');
 
 		if ($id != "" && !$one) { $this->db->where ('works.owner', $id); }
 
@@ -68,6 +62,8 @@ class obras_model extends CI_Model {
 			return $this->db->get ()
 				        ->row ();
 		}
+
+		$this->db->order_by ('works.id', 'asc');
 
 		return $this->db->get ()
 				        ->result ();

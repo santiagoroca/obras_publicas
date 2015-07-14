@@ -86,19 +86,24 @@ class obras extends CI_Controller {
 	}
 
 	public function update ($id) {
+		if (!$this->obras_model->its_mine (
+			$this->session->all_userdata()['data']->h_id, $id
+		)) redirect (base_url().'obras/mylist');
+		
 		$this->obras_model->update (
 			Array (
-				$this->input->post ('title'),
-				$this->input->post ('s_desc'),
-				$this->input->post ('l_desc_a'),
-				$this->input->post ('l_desc_b'),
-				$this->input->post ('progress'),
-				$this->input->post ('tag'),
-				$this->input->post ('image')
+				'title' => $this->input->post ('titulo_obra'),
+				's_desc' => $this->input->post ('breve_descripcion'),
+				'l_desc_a' => $this->input->post ('descripcion_detallada_a'),
+				'l_desc_b' => $this->input->post ('descripcion_detallada_b'),
+				'progress' => $this->input->post ('progreso'),
+				'tags' => $this->input->post ('tag'),
 			),
 			$this->input->post ('info_extra'),
 			$id
 		);	
+
+		redirect (base_url ().'obras/mylist');
 	}
 
 	public function mylist () {

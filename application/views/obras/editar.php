@@ -1,7 +1,7 @@
 <div class="page-header page-header-custom" >
   <h1 class="update-user-title" >Cargar nueva Obra</h1>
 </div>
-<form method="POST" action="<?=$action_url?>">
+<form method="POST" action="<?=$action_url?>/<?=$data->id?>">
   <div class="form-group">
     <input value="<?=isset($data->title) ? $data->title : ""?>" required name="titulo_obra" class="form-control" placeholder="Titulo Obra">
   </div>
@@ -23,9 +23,9 @@
   <div class="page-header">
     <h4>Informacion Extra</h4>
   </div>
-  <div class="form-group">
+  <!--<div class="form-group">
     <button id="add_button" type="button" class="btn btn-success">Agregar</button>
-  </div>
+  </div>-->
   <div id="container" class="row form-group">
     <?php foreach ($extra_info as $k => $v) { ?>
       
@@ -39,7 +39,7 @@
             <div class="form-group">
               <textarea name="info_extra[<?=$k ?>][description]" class="form-control avoidresize" rows="3" placeholder="Descripcion"><?=isset($v->desc) ? $v->desc : ""?></textarea>
             </div>
-            <input id="i_name_<?=$k ?>" value="<?=isset($v->icon) ? $v->icon: ""?>" type="hidden" name="info_extra[<?=$k ?>][icon]" />
+            <input id="i_name_<?=$k ?>" value="<?=isset($v->id) ? $v->id: ""?>" type="hidden" name="info_extra[<?=$k ?>][id]" />
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
     <input value="<?=isset($data->tags) ? $data->tags : ""?>" name="tag" class="form-control" placeholder="Tags eg: cordoba, obra, bienestar" required>
   </div>
   <div class="row-fluid">
-    <button type="submit" class="btn btn-success pull-right">Crear</button>
+    <button type="submit" class="btn btn-success pull-right">Guardar</button>
   </div>
 </form>
 <script type="text/template" id="template">
@@ -107,14 +107,6 @@ $ (document).ready (function () {
     $ ("#container").append (template({
       index: indexOf++
     }));
-  });
-
-  $ (document).delegate ('.image_carrousel', 'click', function () {
-    var id = $ (this).data ('id');
-    var val = parseInt ($ ('#i_name_' + id).val ()) + 1;
-    var val = val == icons.length ? 0 : val;
-    $ ('#i_name_' + id).val (val);
-    $ (this).attr ('class', icons[val]);
   });
 
   $ ('.progress').click (function (e) {
