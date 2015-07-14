@@ -17,15 +17,13 @@
 	<body>
 		<div class="topbar-image">
 			<div class="topbar col-md-offset-3">
-				<a href="<?=base_url()?>obras/home" class="header-link">
-					<img class="img-height" alt="Obras Públicas Pcia. de Córdoba" src="<?=base_url()?>assets/img/topbar_logo.jpg" >
-				</a>
+				<h1 class="title-header">ARGENTINA EN OBRAS</h1>
 			</div>
 		</div>
 		<nav class="navbar navbar-default bar-border-radius">
 			<div class="container-fluid col-md-6 col-md-offset-3">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="<?=base_url()?>obras/home">Obras</a>
+					<a class="navbar-brand" href="<?=base_url()?>obras/home">Argentina en obras</a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -44,8 +42,8 @@
 							</ul>
 						</li>
 					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
+				</div>
+			</div>
 		</nav>
 		<div class="col-md-offset-3 col-md-6 page-body">
 			<div class="content">
