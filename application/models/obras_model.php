@@ -15,14 +15,23 @@ class obras_model extends CI_Model {
 		$this->db->insert ('works', $work);
 		$i_id = $this->db->insert_id ();
 
-		foreach ($infos as $k => $info) {
-			$this->db->insert ('extra_info', Array (
-				'id_work' => $i_id,
-				'title' => $info ['title'],
-				'desc' => $info ['description'],
-				'icon' => $info ['icon']
-			));
-		}
+		if ($images)
+			foreach ($images as $k => $image) {
+				$this->db->insert ('extra_image', Array (
+					'id_work' => $i_id,
+					'path' => $image
+				));
+			}
+
+		if ($infos)
+			foreach ($infos as $k => $info) {
+				$this->db->insert ('extra_info', Array (
+					'id_work' => $i_id,
+					'title' => $info ['title'],
+					'desc' => $info ['description'],
+					'icon' => $info ['icon']
+				));
+			}
 
 		$this->db->trans_complete();
 
@@ -85,6 +94,15 @@ class obras_model extends CI_Model {
 						
 		return $this->db->get ()
 				        ->result ();
+	}
+
+	public function get_extra_image ($id) {
+		$this->db->select ('*') 
+						->from ('extra_image')
+						->where ('extra_image.id_work', $id);
+						
+		return $this->db->get ()
+				        ->result ();	
 	}
 	
 }

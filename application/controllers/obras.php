@@ -39,6 +39,16 @@ class obras extends CI_Controller {
 	    return $errors;
 	}
 
+	private function generateRandomString($length = 50) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+	}
+
 	public function index () {
 		$this->home ();
 	}
@@ -68,6 +78,34 @@ class obras extends CI_Controller {
 	}
 
 	public function create () {
+
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$this->load->library('upload');
+
+	    $name_array = array();
+		$count = count($_FILES['userfile']['size']);
+		var_dump($count);
+		foreach($_FILES as $key=>$value)
+			for($s=0; $s <= $count - 1; $s++) {
+				echo $s;
+				$_FILES['userfile']['name'] = $value['name'][$s];
+				$_FILES['userfile']['type'] = $value['type'][$s];
+				$_FILES['userfile']['tmp_name'] = $value['tmp_name'][$s];
+				$_FILES['userfile']['error'] = $value['error'][$s];
+				$_FILES['userfile']['size'] = $value['size'][$s];  
+				
+				$name = $this->generateRandomString().".".pathinfo($value['name'][$s], PATHINFO_EXTENSION);
+				$config['file_name'] = $name;
+
+				$this->upload->initialize($config);
+				if(!$this->upload->do_upload()) {
+					var_dump($this->upload->display_errors());
+					exit;
+				}
+				$name_array[] = $name;
+			}
+
 		$this->obras_model->create (
 			Array (
 				'title' => $this->input->post ('titulo_obra'),
@@ -78,7 +116,7 @@ class obras extends CI_Controller {
 				'tags' => $this->input->post ('tag'),
 				'owner' => $this->session->all_userdata()['data']->h_id
 			),
-			$this->input->post ('misc_images'),
+			$name_array,
 			$this->input->post ('info_extra')
 		);
 
@@ -114,8 +152,12 @@ class obras extends CI_Controller {
     	));
 	}
 
-	public function load () {
-		$this->loadContentPremium ('obras/premium/home', Array ());
+	public function load ($id) {
+		$this->loadContentPremium ('obras/premium/home', Array (
+			'data' => $this->obras_model->get ($id, true),
+			'extra_info' => $this->obras_model->get_extra_info ($id),
+			'extra_image' => $this->obras_model->get_extra_image ($id)
+		));
 	}
 
 }
