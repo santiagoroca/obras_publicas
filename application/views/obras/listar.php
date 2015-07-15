@@ -1,10 +1,8 @@
-
-  <h1>Obras</h1>
-  <hr class="small">
-</div>
+<h1>Obras</h1>
+<hr class="small">
 <ul class="media-list">
 	<?php foreach ($data as $w) { ?>
-	<li class="media<?=$w->priority == 1 ? '-high premium-bg' : ''?>">
+	<li id=#corner-ribbon class="media<?=$w->priority == 1 ? '-high premium-bg' : ''?>">
 		<a href="#" >
 			<div class="media-left premium-bg">
 				<img class="media-object premium-bg" src="<?=base_url().'assets/img/thumbnail.png'?>">
