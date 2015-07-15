@@ -12,8 +12,11 @@
 				'glyphicon glyphicon-road',
 				'glyphicon glyphicon-tree-conifer' ) [$i];
 } ?>
-<div class="topbar-image">
-	<div class="topbar col-md-offset-2 col-md-8">
+<div class="topbar-image" <?php if (sizeof($extra_image) > 0) {
+			echo "style='background-image: url(\"/uploads/".$extra_image [0]->path."\")'";
+		} ?>
+	>
+	<div class="topbar col-md-offset-2 col-md-8" >
 		<h1 class="title-header"><?=$data->title?></h1>
 		<h3 class="subtitle-header">
 		<?=$data->s_desc?>
