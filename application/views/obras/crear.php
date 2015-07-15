@@ -1,7 +1,7 @@
 <div class="page-header page-header-custom" >
   <h1 class="update-user-title" >CARGAR OBRA</h1>
 </div>
-<form method="POST" action="<?=$action_url?>">
+<form method="POST" action="<?=$action_url?>" enctype="multipart/form-data">
   <div class="form-group">
     <input required name="titulo_obra" class="form-control" placeholder="Titulo Obra">
   </div>
@@ -19,7 +19,7 @@
   </div>
   <div class="form-group">
     <label class="log-in">Añade una foto de la Obra.</label>
-    <input type="file" id="exampleInputFile">
+    <input type="file" name="userfile[]" multiple id="exampleInputFile">
     <p class="help-block">Foto .jpg, .bmp</p>
   </div>
   <div class="page-header">

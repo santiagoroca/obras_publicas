@@ -14,6 +14,4 @@
 		<!-- Underscore -->
 		<script src="<?=base_url()?>assets/js/underscore.js"></script>
 	</head>
-
 	<body>
-		<div class="home-body"></div>
