@@ -1,6 +1,11 @@
-<div>
-  <h1>Obras</h1>
-  <hr class="small">
+<div class="page-header page-header-custom row" >
+	<h1 class="col-md-8 update-user-title" >OBRAS</h1>
+	<div class="input-group input-group-lg">
+		<input disabled type="text" class="search-input form-control" placeholder="Buscar" aria-describedby="sizing-addon1">
+		<span class="search-icon input-group-addon" id="sizing-addon1">
+			<span class="glyphicon glyphicon-search"></span>
+		</span>
+	</div>
 </div>
 <ul class="media-list">
 	<?php foreach ($data as $w) { ?>
@@ -11,12 +16,11 @@
 			</div>
 			<div class="media-body">
 				<h4 class="media-heading">
-					<?php if ($w->priority == 1) { ?>
-
-						<span class="premium-member-star glyphicon glyphicon-star-empty pull-right premium-bg"></span>
-					<?php } ?>
-					<h2 class="media-title"><?=$w->title?><span class="small"> <?=$w->priority == 1 ? '- ' . $w->name.' '.$w->last_name :''?></span>
-					</h2>
+				<?php if ($w->priority == 1) { ?>
+				<span class="premium-member-star glyphicon glyphicon-star-empty pull-right premium-bg"></span>
+				<?php } ?>
+				<h2 class="media-title"><?=$w->title?><span class="small"> - <?=$w->priority == 1 ? $w->name.' '.$w->last_name : $w->entity_name ?></span>
+				</h2>
 				</h4>
 				<p class="p-media-body"><?=$w->s_desc?></p>
 				

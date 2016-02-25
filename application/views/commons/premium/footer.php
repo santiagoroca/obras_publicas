@@ -15,12 +15,23 @@
 						<div class="clear:both"></div>
 					</div>
 					<div class="col-md-offset-8">
-						<a href="#">Terminos y condiciones</a> ·
-						<a href="#"> Legal</a> ·
-						<a href="#"> About Us</a>
+						<span class="pull-right footer-tags" >
+							<a href="#">Terminos y condiciones</a> ·
+							<a href="#"> Legal</a> ·
+							<a href="#"> About Us</a>
+						</span>
 					</div>
 				</div>
 			</div>
 		</div>
 	</body>
+
+	<script>
+
+		$(document).ready(function() {
+			$(".image-popup-no-margins").fancybox({});
+		});
+
+	</script>
+
 </html>

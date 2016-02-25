@@ -9,6 +9,8 @@ class obras extends CI_Controller {
 		$this->load->library('session');
 		$this->load->helper('url');
 		$this->load->model("obras_model");
+
+		$this->is_user_in = isset($this->session->all_userdata()['data']->u_id);
 	}
 
 	private function loadContent ($view_name, $params, $header = '') {
@@ -54,12 +56,16 @@ class obras extends CI_Controller {
 	}
 
 	public function create_form () {
+		if (!$this->is_user_in) redirect (base_url()."user");
+
 		$this->loadContent ('obras/crear', Array (
 			'action_url' => base_url().'obras/create'
 		));
 	}
 
 	public function update_form ($id) {
+		if (!$this->is_user_in) redirect (base_url()."user");
+
 		if (!$this->obras_model->its_mine (
 			$this->session->all_userdata()['data']->h_id, $id
 		)) redirect (base_url().'obras/mylist');
@@ -72,15 +78,18 @@ class obras extends CI_Controller {
 	}
 
 	public function home ($id = "") {
+		if (!$this->is_user_in) redirect (base_url()."user");
+
 		$this->loadContent ('obras/listar', Array (
 			'data' => $this->obras_model->get ()
 		));
 	}
 
 	public function create () {
+		if (!$this->is_user_in) redirect (base_url()."user");
 
 		$config['upload_path'] = './uploads/';
-		$config['allowed_types'] = 'gif|jpg|png';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$this->load->library('upload');
 
 	    $name_array = array();
@@ -100,8 +109,7 @@ class obras extends CI_Controller {
 
 				$this->upload->initialize($config);
 				if(!$this->upload->do_upload()) {
-					var_dump($this->upload->display_errors());
-					exit;
+					redirect (base_url ().'obras/mylist');
 				}
 				$name_array[] = $name;
 			}
@@ -124,6 +132,8 @@ class obras extends CI_Controller {
 	}
 
 	public function update ($id) {
+		if (!$this->is_user_in) redirect (base_url()."user");
+
 		if (!$this->obras_model->its_mine (
 			$this->session->all_userdata()['data']->h_id, $id
 		)) redirect (base_url().'obras/mylist');
@@ -145,6 +155,8 @@ class obras extends CI_Controller {
 	}
 
 	public function mylist () {
+		if (!$this->is_user_in) redirect (base_url()."user");
+
         $this->loadContent ('obras/mylist', Array (
     		'data' => $this->obras_model->get (
     			$this->session->all_userdata()['data']->h_id
@@ -153,11 +165,25 @@ class obras extends CI_Controller {
 	}
 
 	public function load ($id) {
+		if (!$this->is_user_in) redirect (base_url()."user");
+
 		$this->loadContentPremium ('obras/premium/home', Array (
 			'data' => $this->obras_model->get ($id, true),
 			'extra_info' => $this->obras_model->get_extra_info ($id),
 			'extra_image' => $this->obras_model->get_extra_image ($id)
 		));
+	}
+
+	public function delete ($id) {
+		if (!$this->is_user_in) redirect (base_url()."user");
+
+		if (!$this->obras_model->its_mine (
+			$this->session->all_userdata()['data']->h_id, $id
+		)) redirect (base_url().'obras/mylist');
+
+		$this->obras_model->disable ($id);
+
+		redirect (base_url().'obras/mylist');		
 	}
 
 }

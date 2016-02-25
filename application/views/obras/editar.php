@@ -1,5 +1,21 @@
-<div class="page-header page-header-custom" >
-  <h1 class="update-user-title" >CARGAR OBRA</h1>
+<?php function getValue ($i) {
+  echo Array ('glyphicon glyphicon-piggy-bank',
+        'glyphicon glyphicon-stats',
+        'glyphicon glyphicon-phone-alt',
+        'glyphicon glyphicon-flash',
+        'glyphicon glyphicon-shopping-cart',
+        'glyphicon glyphicon-fire',
+        'glyphicon glyphicon-calendar',
+        'glyphicon glyphicon-remove-circle',
+        'glyphicon glyphicon-ok-circle',
+        'glyphicon glyphicon-off',
+        'glyphicon glyphicon-road',
+        'glyphicon glyphicon-tree-conifer' ) [$i];
+} ?>
+
+<div class="page-header page-header-custom row" >
+  <h1 class="col-md-8 update-user-title" ></a>EDITAR OBRA</h1>
+  <a class="col-md-4" href="<?=base_url()."obras/delete/".$data->id?>"><span style="font-size: 30px" class="pull-right glyphicon glyphicon-trash"></span></a>
 </div>
 <form method="POST" action="<?=$action_url?>/<?=$data->id?>">
   <div class="form-group">
@@ -14,11 +30,8 @@
   <div class="page-header">
     <h4>Seccion Inferior</h4>
   </div>
-  <textarea name="descripcion_detallada_b" class="form-control avoidresize" rows="5" placeholder="Descripción Detallada"><?=isset($data->l_desc_b) ? $data->l_desc_b : ""?></textarea>
   <div class="form-group">
-    <label class="log-in">Añade una foto de la Obra.</label>
-    <input type="file" id="exampleInputFile">
-    <p class="help-block">Foto .jpg, .bmp</p>
+    <textarea name="descripcion_detallada_b" class="form-control avoidresize" rows="5" placeholder="Descripción Detallada"><?=isset($data->l_desc_b) ? $data->l_desc_b : ""?></textarea>
   </div>
   <div class="page-header">
     <h4>Informacion Extra</h4>
@@ -31,7 +44,7 @@
       
       <div class="col-md-3">
         <div class="thumbnail">
-          <span class="image_carrousel glyphicon glyphicon-minus" data-id="<?=$k ?>"></span>
+          <span class="image_carrousel glyphicon <?=getValue($v->icon)?>" data-id="<?=$k ?>"></span>
           <div class="caption">
             <div class="form-group">
               <input value="<?=isset($v->title) ? $v->title : ""?>" name="info_extra[<?=$k ?>][title]" class="form-control" placeholder="Titulo" required>
@@ -96,12 +109,6 @@ $ (document).ready (function () {
     'image_carrousel glyphicon glyphicon-road',
     'image_carrousel glyphicon glyphicon-tree-conifer'
   ];
-
-  $ ('.image_carrousel').each (function () {
-    var id = $ (this).data ('id');
-    var val = parseInt ($ ('#i_name_' + id).val ());
-    $ (this).attr ('class', icons[val]);
-  });
 
   $ ("#add_button").click (function () {
     $ ("#container").append (template({

@@ -32,7 +32,7 @@ body {
 }
 
 .page-header-custom h1 {
-	margin: 100px 0 20px;
+	margin: 0px 0 20px;
 	border-bottom: 0px;
 }
 
@@ -61,6 +61,8 @@ body {
 	background-image: url("../img/background.jpg"), -moz-linear-gradient(top, #6cab26, #6ceb86);
 	background-image: url("../img/background.jpg"), -o-linear-gradient(top, #6cab26, #6ceb86);
 	background-image: url("../img/background.jpg"), linear-gradient(to bottom, #6cab26, #6ceb86);
+	
+	
 	background-size: cover;
 	height: 100%;	
 	position: absolute;
@@ -73,6 +75,7 @@ body {
 	padding: 0;
 	margin: 0;
 	color: #555;
+	font-size: 50px;
 }
 
 .bar-border-radius {
@@ -485,8 +488,8 @@ background:rgba(255,248,220,0.5);
 
 .detail-more-content {
 	background-color: #f4f4f4;
-	padding-bottom: 100px;
-	margin-top: 150px;
+	padding-bottom: 40px;
+	margin: 150px 0 150px;
 }
 
 .detail-page-header-divider {
@@ -504,4 +507,71 @@ background:rgba(255,248,220,0.5);
 .detail-image-preview {
 	width: 100%;
 }
->>>>>>> 5250a211f1ed9cbe46e9e9703f0d72932adeae6c
+
+input[type=file] {
+	  width: 100%;
+}
+
+.search-input {
+	padding: 15px;
+	background-color: #f8f8f8;
+	border: 1px solid rgba(0,0,0, 0.075);
+	margin-bottom: 25px;
+	font-size: 19px;
+	transition: all 0.4s;
+	border-radius: 0!important;
+}
+
+.search-icon {
+	background-color: #e4e4e4;
+	border-radius: 0!important;
+	border: 1px solid rgba(0,0,0, 0.075);
+}
+
+/* padding-bottom and top for image */
+.mfp-no-margins img.mfp-img {
+	padding: 0;
+}
+/* position of shadow behind the image */
+.mfp-no-margins .mfp-figure:after {
+	top: 0;
+	bottom: 0;
+}
+/* padding for main container */
+.mfp-no-margins .mfp-container {
+	padding: 0;
+}
+
+.mfp-with-zoom .mfp-container,
+.mfp-with-zoom.mfp-bg {
+	opacity: 0;
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: all 0.3s ease-out; 
+	-moz-transition: all 0.3s ease-out; 
+	-o-transition: all 0.3s ease-out; 
+	transition: all 0.3s ease-out;
+}
+
+.mfp-with-zoom.mfp-ready .mfp-container {
+		opacity: 1;
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+		opacity: 0.8;
+}
+
+.mfp-with-zoom.mfp-removing .mfp-container, 
+.mfp-with-zoom.mfp-removing.mfp-bg {
+	opacity: 0;
+}
+
+.tags {
+	margin-top: 40px;
+}
+
+.detail-work-design {
+	margin-bottom: 40px
+}
+
+.footer-tags {
+	margin-right: 20px;
+}

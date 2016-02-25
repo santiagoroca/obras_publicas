@@ -12,8 +12,18 @@
 				'glyphicon glyphicon-road',
 				'glyphicon glyphicon-tree-conifer' ) [$i];
 } ?>
+
+<?php function randomLabel () {
+	echo Array ('default',
+				'primary',
+				'success',
+				'info',
+				'warning',
+				'danger') [(int) rand (0, 5)];
+} ?>
+
 <div class="topbar-image" <?php if (sizeof($extra_image) > 0) {
-			echo "style='background-image: url(\"/uploads/".$extra_image [0]->path."\")'";
+			echo "style='background-image: url(\"".base_url()."uploads/".$extra_image [0]->path."\")'";
 		} ?>
 	>
 	<div class="topbar col-md-offset-2 col-md-8" >
@@ -30,16 +40,15 @@
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li><a href="#">Autoridades</a></li>
-			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Cuenta<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="<?=base_url()?>user/update_form">Mis Datos</a></li>
-						<li><a href="<?=base_url()?>obras/create_form">Cargar Obra</a></li>
-						<li><a href="<?=base_url()?>obras/mylist">Mis Obras</a></li>
+						<?php if (isset($this->session->all_userdata()['data']->h_id)) { ?>
+							<li><a href="<?=base_url()?>obras/create_form">Cargar Obra</a></li>
+							<li><a href="<?=base_url()?>obras/mylist">Mis Obras</a></li>
+						<?php } ?>
 						<li role="separator" class="divider"></li>
 						<li><a href="<?=base_url()?>user/logout">Salir</a></li>
 					</ul>
@@ -78,10 +87,7 @@
 			</div>
 		</div>
 		<div class="row detail-more-content">
-			<h1 class="detail-work-subtitle">
-			DISEÑO DE LA OBRA
-			</h1>
-			<div class="col-md-offset-3 col-md-6 page-header"></div>
+			<h1 class="detail-work-subtitle detail-work-design">DISEÑO DE LA OBRA</h1>
 			<div class="col-md-offset-1 col-md-10 detail-work-long-a">
 				<?=$data->l_desc_b?>
 			</div>
@@ -93,8 +99,15 @@
 			<div class="col-md-offset-3 col-md-6 page-header"></div>
 			<?php foreach ($extra_image as $key => $value) { ?>
 				<div class="col-md-4">
-					<img class="detail-image-preview" src="<?=base_url()."uploads/".$value->path ?>" />
+					<a data-fancybox-type="iframe" class="mfp-iframe image-popup-no-margins" href="<?=base_url()."uploads/".$value->path ?>">
+						<img class="thumbnail detail-image-preview" src="<?=base_url()."uploads/".$value->path ?>">
+					</a>
 				</div>
 			<?php } ?>
-			
+		</div>
+
+		<div class="tags pull-right">
+			<?php foreach (preg_split('/,/', $data->tags) as $tag) { ?>
+				<span class="label label-<?=randomLabel()?>"><?=$tag?></span>
+			<?php } ?>
 		</div>

@@ -28,16 +28,15 @@
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li><a href="#">Autoridades</a></li>
-					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mi Cuenta<span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?=base_url()?>user/update_form">Mis Datos</a></li>
-								<li><a href="<?=base_url()?>obras/create_form">Cargar Obra</a></li>
-								<li><a href="<?=base_url()?>obras/mylist">Mis Obras</a></li>
+								<?php if (isset($this->session->all_userdata()['data']->h_id)) { ?>
+									<li><a href="<?=base_url()?>obras/create_form">Cargar Obra</a></li>
+									<li><a href="<?=base_url()?>obras/mylist">Mis Obras</a></li>
+								<?php } ?>
 								<li role="separator" class="divider"></li>
 								<li><a href="<?=base_url()?>user/logout">Salir</a></li>
 							</ul>

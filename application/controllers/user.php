@@ -11,6 +11,8 @@ class user extends CI_Controller {
 		$this->load->model("user_model");
 
 		date_default_timezone_set('America/Argentina/Buenos_Aires');
+
+		$this->is_user_in = isset($this->session->all_userdata()['data']->u_id);
 	}
 
     public function index () {
@@ -44,35 +46,43 @@ class user extends CI_Controller {
 	}
 
 	public function log_in_form () {
+		if ($this->is_user_in) redirect (base_url()."obras");
+
 		$this->loadContent ('home/home', Array (
-			'action_url' => 'user/log_in',
-			'new_user_url' => 'user/create_form'
+			'action_url' => base_url().'user/log_in',
+			'new_user_url' => base_url().'user/create_form'
 		), '_out');
 	}
 
 	public function create_form () {
+		if ($this->is_user_in) redirect (base_url()."obras");
+
 		$errors = $this->session->flashdata('errors');
 
 		$this->loadContent ('home/nuevo_usuario', Array (
-			'action_url' => 'create',
+			'action_url' => base_url().'user/create',
 			'errors' => isset($errors) ? json_decode($errors) : false
 		), '_out');
 	}
 
 	public function update_form () {
+		if (!$this->is_user_in) redirect (base_url()."user");
+
         $errors = $this->session->flashdata('errors');
         $success = $this->session->flashdata('success');
 
 		$this->loadContent ('home/modificar_usuario', Array(
             'data' => $this->session->all_userdata()['data'],
-            'action_url_profile_info' => 'update_profile',
-            'action_url_user_info' => 'update_user',
+            'action_url_profile_info' => base_url().'user/update_profile',
+            'action_url_user_info' => base_url().'user/update_user',
             'errors' => isset($errors) ? json_decode($errors) : false,
             'success' => $success
         ), '');
 	}
 
     public function update_user () {
+    	if (!$this->is_user_in) redirect (base_url()."user");
+
         $password = $this->input->post ('contrasenia');
         $data = Array (
             'user_info' => Array (),
@@ -94,6 +104,8 @@ class user extends CI_Controller {
     }
 
     public function update_profile () {
+    	if (!$this->is_user_in) redirect (base_url()."user");
+
 		$name = $this->input->post ('nombre');
 		$last_name = $this->input->post ('apellido');
 		$address = $this->input->post ('direccion');
@@ -127,7 +139,7 @@ class user extends CI_Controller {
 		}
 	}
 
-	public function create () {
+	public function create () {		
 		$user = $this->input->post ('usuario');
 		$password = $this->input->post ('contrasenia');
 		$name = $this->input->post ('nombre');
@@ -167,7 +179,7 @@ class user extends CI_Controller {
 				'tel' => $tel,
 				'email' =>$email,
 				'type' => 1,
-				'birth_date' => $birth_date
+				'birth_date' => ''
 			)
 		);
 			

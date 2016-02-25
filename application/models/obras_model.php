@@ -58,21 +58,25 @@ class obras_model extends CI_Model {
 	}
 
 	public function get ($id = "", $one = false) {
-		$this->db->select ('works.*, high_profile.type as priority, high_profile.entity, profile.name, profile.last_name') 
+		$this->db->select ('works.*, high_profile.type as priority, entity.name as entity_name, profile.name, profile.last_name') 
 						->from ('works')
 						->join ('high_profile', 'works.owner = high_profile.id', 'LEFT')
-						->join ('profile', 'high_profile.id_profile = profile.id', 'LEFT');
+						->join ('profile', 'high_profile.id_profile = profile.id', 'LEFT')
+						->join ('entity', 'high_profile.entity_id = entity.id', 'LEFT');
 
 		if ($id != "" && !$one) { $this->db->where ('works.owner', $id); }
 
 		if ($id != "" && $one) {
-			$this->db->where ('works.id', $id)->limit (1); 
+			$this->db->where ('works.id', $id)
+			         ->where ('works.active', 1)
+			         ->limit (1);
 
 			return $this->db->get ()
 				        ->row ();
 		}
 
-		$this->db->order_by ('works.id', 'asc');
+		$this->db->order_by ('works.id', 'asc')
+				 ->where ('works.active', 1);
 
 		return $this->db->get ()
 				        ->result ();
@@ -82,7 +86,8 @@ class obras_model extends CI_Model {
 				$this->db->select ('works.*') 
 						->from ('works')
 						->where ('works.id', $w_id)
-						->where ('works.owner', $u_id);
+						->where ('works.owner', $u_id)
+						->where ('works.active', 1);
 
 		return $this->db->get ()->num_rows () == 1;
 	}
@@ -103,6 +108,13 @@ class obras_model extends CI_Model {
 						
 		return $this->db->get ()
 				        ->result ();	
+	}
+
+	public function disable ($id) {
+		$this->db->where ('id', $id);
+		$this->db->update ('works', Array (
+			'active' => 0
+		));
 	}
 	
 }
